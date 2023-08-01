@@ -141,6 +141,9 @@ $route['api/archivelistall']['GET'] = 'api/archivelistall_controller';
 //หารายการ ทั้งหมด ต่อหน้า
 
 $route['api/archivelistallpage']['GET'] = 'api/archivelistallpage_controller';
+
+$route['api/taglistpage']['GET'] = 'api/taglistpage_controller';
+
 /*
 $route[$routes->posts]['GET'] = 'home_controller/posts';
 $route[$routes->gallery_album . '/(:num)']['GET'] = 'home_controller/gallery_album/$1';

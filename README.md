@@ -1,5 +1,4 @@
-# omekaapi
-api คลังข้อมูลดิจิทัล
+#api คลังข้อมูลดิจิทัล
 
 เรียก ผ่าน localhost
 http://localhost/omekaapi/api

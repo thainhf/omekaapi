@@ -129,7 +129,11 @@ class Api_controller extends REST_Controller
                 "topic"=>"**แสดงรายการ [หน้า-> page=1, จำนวนรายการต่อหน้า -> limitperpage=200]",
                 "url"=>base_url()."api/archivelistallpage?page=8&limitperpage=200"
             ),
-
+            array(
+                "id"=>9,
+                "topic"=>"**แสดงรายการ Tags [หน้า-> page=1, จำนวนรายการต่อหน้า -> limitperpage=2000]",
+                "url"=>base_url()."api/taglistpage?page=1&limitperpage=2000"
+            ),
             //$route['api/relations']['GET'] = 'api/relations_controller';
 
         );
