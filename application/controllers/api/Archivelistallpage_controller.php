@@ -67,6 +67,10 @@ class Archivelistallpage_controller extends REST_Controller
                 $api_url_item=$vomekas_url."items/".$vid;
 
                 $json_objekat    = cal_curl_api($api_url_item);
+//                echo "<pre>999=".$api_url_item;
+//                    print_r($json_objekat);
+//                    echo "</pre>";
+             //   exit();
                 if(!empty($json_objekat)) {
                     if(empty( $json_objekat->errors)){
 
@@ -88,6 +92,8 @@ class Archivelistallpage_controller extends REST_Controller
                                     array_push($catesNameArray, trim($item_coverage->a_value));
                                 }
                             }
+                        }else{
+                            array_push($catesNameArray, $vconfig->config["nd"]);
                         }
 
                         $subjectNameArray= array();
@@ -98,6 +104,8 @@ class Archivelistallpage_controller extends REST_Controller
                                     array_push($subjectNameArray, trim($item->a_value));
                                 }
                             }
+                        }else{
+                            array_push($subjectNameArray, $vconfig->config["nd"]);
                         }
 
                         $description=  $vconfig->config["nd"];
@@ -144,6 +152,8 @@ class Archivelistallpage_controller extends REST_Controller
                                     array_push($rightsArray, trim($item->a_value));
                                 }
                             }
+                        }else{
+                            array_push($rightsArray, $vconfig->config["nd"]);
                         }
 
                         //ประเภทของ รายการ
@@ -155,6 +165,8 @@ class Archivelistallpage_controller extends REST_Controller
                                     array_push($typeArray, trim($item->a_value));
                                 }
                             }
+                        }else{
+                            array_push($typeArray, $vconfig->config["nd"]);
                         }
 
                         //thumbnail
@@ -185,6 +197,8 @@ class Archivelistallpage_controller extends REST_Controller
                                     array_push($dcterms_coverageArray, trim($item->a_value));
                                 }
                             }
+                        }else{
+                            array_push($dcterms_coverageArray, $vconfig->config["nd"]);
                         }
 
                         //หาไฟล์ media
@@ -204,10 +218,27 @@ class Archivelistallpage_controller extends REST_Controller
                                             array_push($creatorArray, trim($item->a_value));
                                         }
                                     }
+                                }else{
+                                    array_push($creatorArray, $vconfig->config["nd"]);
                                 }
 
                             }
                         } //end media
+
+                        //tags
+                        //https://archives.nrct.go.th/mhesi/api/tags?resource_id=11
+                        $tagsArray= array();
+                        $tags= $vconfig->config["nd"];
+                        if(isset($json_objekat->o_module_folksonomy_tag)){
+                            $tag_arr=$json_objekat->o_module_folksonomy_tag;
+                            if(!empty($tag_arr)){
+                                foreach ($tag_arr as $tag) {
+                                    array_push($tagsArray, trim($tag->o_id));
+                                }
+                            }
+                        }else{
+                            array_push($tagsArray, $tags);
+                        }
 
                         //ถ้ามีไฟล์หลายไฟล์ สร้างเป็น หลาย รายการ
                         if($count_mm > 1){
@@ -246,6 +277,7 @@ class Archivelistallpage_controller extends REST_Controller
                                     "created"=>$created,
                                     "rights"=>$rightsArray,
                                     "coverage"=>$dcterms_coverageArray,
+                                    "tags"=>$tagsArray,
                                 );
 
                                 array_push($dataArray, $data);
@@ -291,6 +323,7 @@ class Archivelistallpage_controller extends REST_Controller
                                 "created"=>$created,
                                 "rights"=>$rightsArray,
                                 "coverage"=>$dcterms_coverageArray,
+                                "tags"=>$tagsArray,
                             );
                             array_push($dataArray, $data);
                         }
