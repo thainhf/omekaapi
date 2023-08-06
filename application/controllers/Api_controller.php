@@ -126,7 +126,7 @@ class Api_controller extends REST_Controller
             ),
             array(
                 "id"=>8,
-                "topic"=>"**แสดงรายการ [หน้า-> page=1, จำนวนรายการต่อหน้า -> limitperpage=200]",
+                "topic"=>"**แสดงรายการ [หน้า-> page=1, จำนวนรายการต่อหน้า -> limitperpage=200] ...",
                 "url"=>base_url()."api/archivelistallpage?page=8&limitperpage=200"
             ),
             array(
