@@ -1,0 +1,1 @@
+<?php$config['omekas_url'] = 'https://omeka.p-set.org/api/';$config['omekas_url_item'] = 'https://omeka.p-set.org/s/Prawase/item/';$config['omekas_url_img'] = 'https://omeka.p-set.org/';$config['nd'] ="n.d.";?>

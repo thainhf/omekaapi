@@ -4,11 +4,17 @@
 http://localhost/omekaapi/api
 https://omeka.p-set.org/api/
 
+http://ec2-52-221-226-228.ap-southeast-1.compute.amazonaws.com/omekaapi/
+
+popularlist.php?toplimit=10
+
 1. เนื้อหาคัดสรร (ปี crty = 2023 , เดือน เมษายน crtm=04, จำนวนรายการต่อหน้า limitpermonth=10) [crty=yyyy,crtm=mm,limitpermonth=n]",
 ตัวอย่าง url: "http://localhost/omekaapi/api/monthlylist?crty=2023&crtm=04&limitpermonth=10"
+   monthlylist.php?crty=2023&crtm=04&limitpermonth=10
 
 2. เนื้อหายอดนิยม 5 รายการ hits สูงสุด toplimit [n]
 ตัวอย่าง url: "http://localhost/omekaapi/api/popularlist?toplimit=10"
+   popularlist.php?toplimit=10
 
 3. หารายการ ของปี ย้อนสำรวจความทรงจำสำคัญ ที่เคยเกิดขึ้น ในเดือน เมษายน (เมื่อ 20 ปีที่แล้ว) skipy=20, เดือน skipm=00 ทุกเดือน/ limitperpage=10 ต่อหน้า [skipy=20, skipm=04, limitperpage=10]",
 ตัวอย่าง url: "http://localhost/omekaapi/api/flashbacklist?skipy=20&skipm=04&limitperpage=10"
