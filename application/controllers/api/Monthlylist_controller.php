@@ -9,6 +9,7 @@ class Monthlylist_controller extends REST_Controller
 
     public function index_get()
     {
+        //เนื้อหาคัดสรร (ปี crty = 2023 , เดือน เมษายน crtm=04, จำนวนรายการต่อหน้า limitpermonth=10) [crty=yyyy,crtm=mm,limitpermonth=n]
         $dataArray= array();
         $vconfig=$this->config;
         $crty = $this->input->get('crty', true);
@@ -26,55 +27,84 @@ class Monthlylist_controller extends REST_Controller
         $yyyy="";
         $crtall="";
         if(!empty($crty)){
-           // $yyyy=$crty;
-            $crtall=$crtall.$crty;
+            $yyyy=$crty;
+           // $crtall=$crtall.$crty;
         }else{
-           // $yyyy="";
+            $yyyy="";
            // $crtall=$crtall;
         }
       //  echo $crtall;
        // $mm="";
         if(!empty($crtm)){
-          //  $mm=$crtm;
-            $crtall=$crtall.'-'.$crtm;
+            $mm=$crtm;
+         //   $crtall=$crtall.'-'.$crtm;
         }else{
-         //   $mm="";
+            $mm="";
           //  $crtall=$crtall;
         }
     //    $p_yyyy=$yyyy;
      //   $p_mm=$mm;
       //  $YYYY_MM=$p_yyyy."-".$p_mm; //2023-04
-        $YYYY_MM=$crtall;
+      //  $YYYY_MM=$crtall;
       //  echo $crtall;
 
-        $api_url=$vomekas_url."items?property[0][joiner]=and&property[0][property]=23&property[0][type]=in&property[0][text]=".$YYYY_MM."&sort_by=created&sort_order=desc&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][field]=created&datetime[0][type]=gte".$vper_page;
+       // $str = "Hello world";
+        $mmArr = explode(",", $mm);
+        $i=0;
+        $j=0;
+        $vurl="";
+        foreach ($mmArr as $mm1) {
+          //  echo "<li>$mm</li>";
+            //2023-04
+            $yyyy_mm=$yyyy."-".$mm1;
+            $i=$i+1;
+            if($i==1) {
+                $vurl = "&property[0][property]=23&property[0][type]=in&&property[0][text]=" . $yyyy_mm;
+            }else{
+                $vurl=$vurl."&property[".$j."][joiner]=or&property[".$j."][property]=23&property[".$j."][type]=in&property[".$j."][text]=".$yyyy_mm;
+            }
+            $j=$j+1;
+        }
 
-     //   echo $api_url;
-     //   print_r($vconfig->config["omekas_url"]);
-      //  echo "</pre>";
-    //   exit();
+
+        //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/admin/item?property[0][joiner]=and&property[0][property]=23
+
+
+
+        //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/admin/item?property[0][joiner]=and
+
+        //&property[0][property]=23 // ค้นหาจาก วันที่เผยแพร่ dcterms:issued
+
+        //&property[0][type]=in
+        //&property[0][text]=2023-04
+
+        //&property[1][joiner]=or
+        //&property[1][property]=23
+        //&property[1][type]=in
+        //&property[1][text]=2023-05
+
+        //&property[2][joiner]=or
+        //&property[2][property]=23
+        //&property[2][type]=in
+        //&property[2][text]=2023-06
+
+        //&site_id=1&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&has_media=&has_original=&has_thumbnails=&has_tags=0
+
+        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $resource_template="&resource_template_id[]=2";
+        $vurl=$vurl."&site_id=1&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&has_media=&has_original=&has_thumbnails=&has_tags=0".$resource_template;
+
+       // $api_url_count = $vomekas_url."infos?property[0][joiner]=and" .$vurl;
+
+        $api_url = $vomekas_url."items?property[0][joiner]=and" .$vurl."&page=1&per_page=".$vlimitpermonth;
+   //     echo $api_url;
+     //   exit();
+
+      //  $api_url=$vomekas_url."items?property[0][joiner]=and&property[0][property]=23&property[0][type]=in&property[0][text]=".$YYYY_MM."&sort_by=created&sort_order=desc&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][field]=created&datetime[0][type]=gte".$vper_page;
+
 
         $json_objekat    = cal_curl_api($api_url);
-/*
-        $curl = curl_init($api_url);
-        curl_setopt($curl, CURLOPT_URL, $api_url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $headers = array(
-            "REST-API-Key: 1111",
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        //for debug only!
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
-        $resp = curl_exec($curl);
-        curl_close($curl);
-        //var_dump($resp);
-        $words_f = ["o:", "dcterms:", ":tag", "o-module-folksonomy", "@value"];
-        $words_r   = ["o_", "dcterms_", "_tag", "o_module_folksonomy", "a_value"];
-        $resp = str_replace($words_f,$words_r,$resp);
-        $json_objekat    = json_decode($resp);
-        */
 //        echo "<pre>999=";
 //    print_r($json_objekat);
 //    echo "</pre>";
@@ -83,9 +113,6 @@ class Monthlylist_controller extends REST_Controller
         if(!empty($json_objekat)) {
             foreach ($json_objekat as $objQuote) {
 
-//                    echo "<pre>999=";
-//                    print_r($objQuote);
-//                    echo "</pre>";
                 $title=$objQuote->o_title;
                 $o_id=$objQuote->o_id;
               //  $dcterms_date=$objQuote->dcterms_date; //วันที่สร้างเอกสาร
@@ -99,8 +126,6 @@ class Monthlylist_controller extends REST_Controller
                         $thumbnail = $thumbnail_url;
                     }
                 }
-
-
 
                 //cat Collection
 

@@ -30,6 +30,9 @@ class Staffpicks_controller extends REST_Controller
             $vlimitpermonth=99;
         }
 
+        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $resource_template="&resource_template_id[]=2";
+
         $vper_page= "&page=1&per_page=".$vlimitpermonth;
 
         $vomekas_url= $vconfig->config["omekas_url"];
@@ -90,7 +93,7 @@ class Staffpicks_controller extends REST_Controller
               //  echo $month_yyyy[1]."-".$month_yyyy[0]."<br>";
                 $dataArray= [];
                 $YYYY_MM=$month_yyyy[1]."-".$month_yyyy[0]; //yyyy-mm
-                $api_url=$vomekas_url."items?property[0][joiner]=and&property[0][property]=23&property[0][type]=in&property[0][text]=".$YYYY_MM."&sort_by=created&sort_order=desc&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][field]=created&datetime[0][type]=gte".$vper_page;
+                $api_url=$vomekas_url."items?property[0][joiner]=and&property[0][property]=23&property[0][type]=in&property[0][text]=".$YYYY_MM."&sort_by=created&sort_order=desc&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][field]=created&datetime[0][type]=gte".$resource_template.$vper_page;
 
                 $json_objekat    = cal_curl_api($api_url);
                 if(!empty($json_objekat)) {

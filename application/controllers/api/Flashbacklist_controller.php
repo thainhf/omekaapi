@@ -18,7 +18,7 @@ class Flashbacklist_controller extends REST_Controller
         }else{
             $vskipy=0;
         }
-
+       // skipm=04
         $skipm = $this->input->get('skipm', true);
 
         if(!empty($skipm)){
@@ -52,8 +52,30 @@ class Flashbacklist_controller extends REST_Controller
 
 
         $vomekas_url = $vconfig->config["omekas_url"];
-        $api_url = $vomekas_url . "items?property[0][joiner]=and&property[0][property]=7&property[0][type]=in&property[0][text]=".$YYYY_MM."&resource_class_id[]=23&sort_by=title&sort_order=asc&datetime[0][type]=gte" . $vper_page;
-      //  echo $api_url;
+
+        //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/admin/item?property[0][joiner]=and&property[0][property]=7&property[0][type]=in&property[0][text]=2018&site_id=1&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&has_media=&has_original=&has_thumbnails=&has_tags=0
+
+        //property[0][joiner]=and
+        //&property[0][property]=7
+        //&property[0][type]=in
+        //&property[0][text]=2018
+        //&site_id=1
+
+        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $resource_template="&resource_template_id[]=2";
+
+
+        $vurl="property[0][joiner]=and&property[0][property]=7&property[0][type]=in&property[0][text]=".$YYYY_MM."&site_id=1&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&has_media=&has_original=&has_thumbnails=&has_tags=0".$resource_template;
+
+        $api_url = $vomekas_url . "items?".$vurl . $vper_page;
+
+        $api_url_count = $vomekas_url."infos?" .$vurl;
+
+
+
+
+       // $api_url = $vomekas_url . "items?property[0][joiner]=and&property[0][property]=7&property[0][type]=in&property[0][text]=".$YYYY_MM."&resource_class_id[]=23&sort_by=title&sort_order=asc&datetime[0][type]=gte" . $vper_page;
+       // echo $api_url."<br>";
 
 
         //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/api/items?property[0][joiner]=and&property[0][property]=7&property[0][type]=in&property[0][text]=2003&resource_class_id[]=23&sort_by=title&sort_order=asc&datetime[0][type]=gte&page=1&per_page=100

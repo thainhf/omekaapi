@@ -23,7 +23,8 @@ class Popularlist_controller extends REST_Controller
        // echo $vtoplimit;
         $vper_page = "&page=1&per_page=" . $vtoplimit;
         $vomekas_url = $vconfig->config["omekas_url"];
-        $api_url = $vomekas_url . "stats?sort_by=hits&sort_order=desc&resource_type=items&type=resource" . $vper_page;
+        $resource_template="&resource_template_id[]=2"; // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $api_url = $vomekas_url . "stats?sort_by=hits&sort_order=desc&resource_type=items&type=resource".$resource_template . $vper_page;
         $json_objekat = cal_curl_api($api_url);
 
 

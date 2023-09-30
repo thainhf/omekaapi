@@ -55,10 +55,12 @@ class Popularall_controller extends REST_Controller
 //        echo "<pre>";
 //        print_r($months_array2);
 //        echo "</pre>";
+        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $resource_template="&resource_template_id[]=2";
 
         $vper_page = "&page=1&per_page=" . $vtoplimit;
         $vomekas_url = $vconfig->config["omekas_url"];
-        $api_url = $vomekas_url . "stats?resource_type=items&sort_by=hits&sort_order=desc&resource_type=items&type=resource" . $vper_page;
+        $api_url = $vomekas_url . "stats?resource_type=items&sort_by=hits&sort_order=desc&resource_type=items&type=resource".$resource_template . $vper_page;
         $json_objekat = cal_curl_api($api_url);
 
       //  http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/api/stats?resource_type=items&sort_by=hits&sort_order=desc&year=2022&by_period=year&page=1&per_page=1000

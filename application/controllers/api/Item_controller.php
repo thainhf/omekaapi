@@ -160,7 +160,8 @@ class Item_controller extends REST_Controller
 
 
                 $abstractNameArray= array();
-                $abstract= $vconfig->config["nd"];
+             //   $abstract= $vconfig->config["nd"];
+                $abstract= "";
                 if(isset($json_objekat->dcterms_abstract)){
                     $dcterms_abstract_arr=$json_objekat->dcterms_abstract;
                     if(!empty($dcterms_abstract_arr)){
@@ -248,6 +249,22 @@ class Item_controller extends REST_Controller
                 }
 
 
+               // $issuedArray= array();
+                $issued=false;
+                if(isset($json_objekat->dcterms_issued)){
+                    $issued_arr=$json_objekat->dcterms_issued;
+                    if(!empty($issued_arr)){
+                        foreach ($issued_arr as $item) {
+                            $issued=true;
+                           // array_push($issuedArray, trim($item->a_value));
+                            // $created=trim($item->a_value);
+                            // $vdate = trim($item->a_value);
+
+                        }
+                    }
+                }
+
+
 
                 //ถ้ามีไฟล์หลายไฟล์ สร้างเป็น หลาย รายการ
                 if($count_mm > 1){
@@ -270,10 +287,21 @@ class Item_controller extends REST_Controller
 
 
                             // if(!empty($dcterms_rights_arr)){
-                            $original_url=$json_objekat2->o_original_url;
-                            $media_type=$json_objekat2->o_media_type;
-                            $source=$json_objekat2->o_source;
-                            $filename=$json_objekat2->o_filename;
+                         //   $original_url=$json_objekat2->o_original_url;
+                           // $media_type=$json_objekat2->o_media_type;
+                          //  $source=$json_objekat2->o_source;
+                          //  $filename=$json_objekat2->o_filename;
+
+
+                            $source = $json_objekat2->o_source;
+
+                            // $url_o_source = 'http://www.youtube.com/watch?v=QH2-TGUlwu4';
+                            $media_type =  isValidYoutubeURL($source) ? 'video/link': $json_objekat2->o_media_type;
+
+                            $original_url = $json_objekat2->o_original_url;
+                            //    $media_type = $json_objekat2->o_media_type;
+
+                            $filename = $json_objekat2->o_filename;
 
                             /*$data_media=array(
                                 "source"=>$original_url,
@@ -315,6 +343,8 @@ class Item_controller extends REST_Controller
                             "created"=>$created,
                             "rights"=>$rightsArray,
                             "coverage"=>$dcterms_coverageArray,
+                            "staffpick"=>$issued,
+
                         );
                         array_push($dataArray, $data);
 
@@ -334,9 +364,19 @@ class Item_controller extends REST_Controller
                         $id_media = $item->o_id;
                         if (!empty($json_objekat2)) {
 
-                            $original_url = $json_objekat2->o_original_url;
-                            $media_type = $json_objekat2->o_media_type;
+
+//                          echo "<pre>media=";
+//                          print_r($json_objekat2);
+//                          echo "</pre>";
+
                             $source = $json_objekat2->o_source;
+
+                           // $url_o_source = 'http://www.youtube.com/watch?v=QH2-TGUlwu4';
+                            $media_type =  isValidYoutubeURL($source) ? 'video/link': $json_objekat2->o_media_type;
+
+                            $original_url = $json_objekat2->o_original_url;
+                        //    $media_type = $json_objekat2->o_media_type;
+
                             $filename = $json_objekat2->o_filename;
 
                         }
@@ -422,9 +462,9 @@ class Item_controller extends REST_Controller
         $this->response($dataArray, 200);
     //====สำหรับ เรียก link รายการเพื่อให้นับ hits=====
        // $api_url22="http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/s/Prawase/item/".$id_link;
-        $vomekas_url_item= $vconfig->config["omekas_url_item"];
-        $api_url22=$vomekas_url_item.$id_link;
-        $json_objekat2    = cal_curl_api($api_url22);
+    //    $vomekas_url_item= $vconfig->config["omekas_url_item"];
+    //    $api_url22=$vomekas_url_item.$id_link;
+    //    $json_objekat2    = cal_curl_api($api_url22);
         //========================
 
 

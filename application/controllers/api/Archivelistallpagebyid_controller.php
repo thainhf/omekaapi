@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'libraries/REST_Controller.php';
-class Archivelistallpage_controller extends REST_Controller
+class Archivelistallpagebyid_controller extends REST_Controller
 {
     public function __construct()
     {
@@ -15,15 +15,45 @@ class Archivelistallpage_controller extends REST_Controller
         $vomekas_url = $vconfig->config["omekas_url"];
 
 
-        $page = $this->input->get('page', true);
-        if(!empty($page)){
-            $vpage=$page;
+        $get_id = $this->input->get('id', true);
+        if(!empty($get_id)){
+            $vid=$get_id;
         }else{
-            $vpage=1;
+            $vid=0;
         }
 
-        //หาจำนวน รายการทั้งหมด
-        $api_url_info = $vomekas_url . "infos";
+        if($vid==0) {
+          //  echo $vid;
+            $data=array(
+                "id"=>0,
+                "title"=>"NO data",
+            );
+            array_push($dataArray, $data);
+
+            $dataAll = array(
+                "data" => $dataArray,
+            );
+            $this->response($dataAll, 200);
+           // echo "999";
+            exit();
+        }
+
+        //2194,5865
+
+        $id_arr = explode(',', $vid);
+        //               echo "<pre>999=";
+        //            print_r($id_arr);
+        //            echo "</pre>";
+        //   exit();
+
+       // if (count($id_arr) == 1) {
+           // $id_arr[]
+      //  } else {
+           // $id_arr
+      //  }
+
+        //หาจำนวน รายการทั้งหมด // ส่วนที่เป็นข้อมูล Visibility=Public
+       /* $api_url_info = $vomekas_url . "infos";
         $json_objekat_info = cal_curl_api($api_url_info);
         $total=0;
         if(!empty($json_objekat_info)){
@@ -33,22 +63,22 @@ class Archivelistallpage_controller extends REST_Controller
                     $total=$itemsall_arr->total;
                 }
             }
-        }
+        }*/
 
-        $limitperpage = $this->input->get('limitperpage', true);
+      //  $limitperpage = $this->input->get('limitperpage', true);
 
-        if(!empty($limitperpage)){
-            $vlimitperpage=$limitperpage;
-        }else{
-            $vlimitperpage=$total;
-        }
+      //  if(!empty($limitperpage)){
+       //     $vlimitperpage=$limitperpage;
+      //  }else{
+       //     $vlimitperpage=$total;
+      //  }
 
         //$vper_page=$per_page;
-        $vper_page = "&page=".$vpage."&per_page=" . $vlimitperpage;
+      //  $vper_page = "&id=".$vid."&per_page=" . $vlimitperpage;
 
 
 
-        $api_url_all = $vomekas_url . "items?sort_by=created&sort_order=asc" . $vper_page;
+      //  $api_url_all = $vomekas_url . "items/" . $id_arr[];
       //  $api_url_info = $vomekas_url . "infos";
       //  echo $api_url;
 
@@ -57,13 +87,14 @@ class Archivelistallpage_controller extends REST_Controller
         //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/api/infos?sort_by=created&sort_order=desc
        // https://omeka.p-set.org/api/items?pretty_print=1
 
-        $json_obj_all = cal_curl_api($api_url_all);
+      //  $json_obj_all = cal_curl_api($api_url_all);
 
-        if(!empty($json_obj_all)) {
-            foreach ($json_obj_all as $objQuote) {
-
-                $vid=$objQuote->o_id;
-
+      //  if(!empty($json_obj_all)) {
+      //      foreach ($json_obj_all as $objQuote) {
+        if (count($id_arr) != 0) {
+            foreach ($id_arr as $o_id) {
+               // $vid=$objQuote;
+                $vid=$o_id;
                 $api_url_item=$vomekas_url."items/".$vid;
 
                 $json_objekat    = cal_curl_api($api_url_item);
@@ -333,14 +364,14 @@ class Archivelistallpage_controller extends REST_Controller
 
 
 
-            }
-        }
+            } //end loop
+        } // end if
 
         $dataAll=array(
             "data"=>$dataArray,
-            "page"=>$vpage,
-            "page_size"=>$vlimitperpage,
-            "total"=>$total,
+           // "page"=>$vpage,
+           // "page_size"=>$vlimitperpage,
+           // "total"=>$total,
         );
 
 

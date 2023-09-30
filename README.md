@@ -2,6 +2,7 @@
 
 เรียก ผ่าน localhost
 http://localhost/omekaapi/api
+https://omeka.p-set.org/api/
 
 1. เนื้อหาคัดสรร (ปี crty = 2023 , เดือน เมษายน crtm=04, จำนวนรายการต่อหน้า limitpermonth=10) [crty=yyyy,crtm=mm,limitpermonth=n]",
 ตัวอย่าง url: "http://localhost/omekaapi/api/monthlylist?crty=2023&crtm=04&limitpermonth=10"
@@ -48,3 +49,11 @@ http://localhost/omekaapi/api
 15. **แสดงรายการ คอลเลกชั่น และ [ Class =  Collection,Dataset,Event,Image],[search=สสส] ,[Collection=10,12,13,14  ex. 10=สิ่งแวดล้อม,12=สุขภาพ,13=การศึกษา ดูจาก id=13 **B แสดงรายการ คอลเลกชั่น] , [property=dcterms_subject,dcterms_description,dcterms_abstract,dcterms_coverage,dcterms_tableOfContents  ดูจาก id=14 **B แสดงรายการ property]
 
 ตัวอย่าง url: "http://localhost/omekaapi/api/archivelistall?class=Collection,Dataset,Event,Image&search=สสส&collection=10,12,13,14&property=dcterms_subject,dcterms_description,dcterms_abstract,dcterms_coverage,dcterms_tableOfContents&page=1&limitperpage=100"
+#========================#
+
+16. แสดงรายการข้อมูล ส่วนที่เป็นข้อมูล Visibility=Public [หน้า-> page=1, จำนวนรายการต่อหน้า -> limitperpage=50]",
+ตัวอย่าง url: "http://localhost/omekaapi/api/archivelistallpage?page=1&limitperpage=50"
+
+17.
+**แสดงรายการ ข้อมูล ส่วนที่เป็นข้อมูล Visibility=Public หาจาก ID [id ที่ต้องการหา-> id=2194,5865]
+ตัวอย่าง url: "http://localhost/omekaapi/api/popularall?revm=3&toplimit=0"

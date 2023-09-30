@@ -59,7 +59,25 @@ class Relations_controller extends REST_Controller
             }
         }
 
-        $api_url_cat = $vomekas_url . "items?resource_class_id[]=23&".$link_cat."&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0&page=1&per_page=100";
+        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $resource_template="&resource_template_id[]=2";
+
+        $api_url_cat = $vomekas_url . "items?resource_class_id[]=23&".$link_cat."&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0&page=1&per_page=100".$resource_template;
+
+      //  echo  $api_url_cat;
+
+        $api_url_count = $vomekas_url."infos?resource_class_id[]=23&".$link_cat."&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0";
+        $json_objcount = cal_curl_api($api_url_count);
+//            echo "<pre>";
+//            print_r($json_objcount->items->total);
+//            echo "</pre>";
+
+        $vcount=$json_objcount->items->total;
+        if($vlimit>=$vcount){
+            $vlimit = $vcount;
+        }
+
+      //  echo  $api_url_count;
 
 
         $json_objekat3 = cal_curl_api($api_url_cat);
@@ -67,6 +85,7 @@ class Relations_controller extends REST_Controller
         if(!empty($json_objekat3)){
 
             $rand_keys = array_rand($json_objekat3, $vlimit);
+         //   $rand_keys = array_rand($json_objekat3, $vcount);
 
             foreach ($rand_keys as $key) {
              //   echo "key=".$key;
@@ -106,7 +125,37 @@ class Relations_controller extends REST_Controller
                         }
 
                         //cat Collection
+
+                        $catesArray= array();
                         $catesNameArray= array();
+
+//                 echo "<pre>===========";
+//                print_r($arr_objekat_item);
+//                echo "</pre>";
+
+
+                        if(isset($arr_objekat_item->o_item_set)){
+                            $item_set_arr=$arr_objekat_item->o_item_set;
+                            if(!empty($item_set_arr)){
+                                foreach ($item_set_arr as $item_set) {
+                                    $vid_set=$item_set->o_id;
+                                    array_push($catesArray, $vid_set);
+                                }
+                            }
+                        }
+
+
+                                              if(isset($arr_objekat_item->dcterms_coverage)){
+                                                  $dcterms_coverage_arr=$arr_objekat_item->dcterms_coverage;
+                                                  if(!empty($dcterms_coverage_arr)){
+                                                      foreach ($dcterms_coverage_arr as $item_coverage) {
+                                                          array_push($catesNameArray, trim($item_coverage->a_value));
+                                                      }
+                                                  }
+                                              }
+
+
+                       /* $catesNameArray= array();
                         if(isset($arr_objekat_item->dcterms_coverage)){
                             $dcterms_coverage_arr=$arr_objekat_item->dcterms_coverage;
                             if(!empty($dcterms_coverage_arr)){
@@ -114,7 +163,7 @@ class Relations_controller extends REST_Controller
                                     array_push($catesNameArray, trim($item_coverage->a_value));
                                 }
                             }
-                        }
+                        }*/
 
                         $dateArray= array();
                         if(isset($arr_objekat_item->dcterms_date)){
@@ -126,13 +175,27 @@ class Relations_controller extends REST_Controller
                             }
                         }
 
+                        $createdArray= array();
+                        if(isset($arr_objekat_item->dcterms_created)){
+                            $dcterms_date_arr=$arr_objekat_item->dcterms_created;
+                            if(!empty($dcterms_date_arr)){
+                                foreach ($dcterms_date_arr as $item) {
+                                    array_push($createdArray, trim($item->a_value));
+                                }
+                            }
+                        }
+
+
+
                         $data=array(
                             "id"=>$o_id,
                             "thumbnail"=>$thumbnail,
+                            "cates"=>$catesArray,
                             "catenames"=>$catesNameArray,
                             "date"=>$dateArray,
                             "title"=>$title,
                             "creator"=>$dcterms_creator,
+                            "created"=>$createdArray,
                         );
                         array_push($dataArray, $data);
 

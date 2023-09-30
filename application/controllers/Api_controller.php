@@ -13,11 +13,15 @@ class Api_controller extends REST_Controller
 
     public function index_get()
     {
+        $vconfig=$this->config;
+        $vomekas_url= $vconfig->config["omekas_url"];
+
         $data = array(
             array(
                 "id"=>1,
-                "topic"=>"เนื้อหาคัดสรร (ปี crty = 2023 , เดือน เมษายน crtm=04, จำนวนรายการต่อหน้า limitpermonth=10) [crty=yyyy,crtm=mm,limitpermonth=n]",
-                "url"=>base_url()."api/monthlylist?crty=2023&crtm=04&limitpermonth=10"
+                "topic"=>"เนื้อหาคัดสรร (ปี crty = 2023 , เดือน ไตรมาส เช่น เมษายน,พฤษภาคม,กรกฎาคม , crtm=04,05,06  , จำนวนรายการต่อหน้า limitpermonth=10) [crty=yyyy,crtm=mm,limitpermonth=n]",
+              //  "url"=>base_url()."api/monthlylist?crty=2023&crtm=04&limitpermonth=10"
+                "url"=>base_url()."api/monthlylist?crty=2023&crtm=04,05,06&limitpermonth=10"
             ),
             array(
                 "id"=>2,
@@ -26,13 +30,14 @@ class Api_controller extends REST_Controller
             ),
             array(
                 "id"=>3,
-                "topic"=>"หารายการ ของปี ย้อนสำรวจความทรงจำสำคัญ ที่เคยเกิดขึ้น ในเดือน เมษายน (เมื่อ 20 ปีที่แล้ว) skipy=20, เดือน skipm=00 ทุกเดือน/ limitperpage=10 ต่อหน้า [skipy=20, skipm=04, limitperpage=10]",
-                "url"=>base_url()."api/flashbacklist?skipy=20&skipm=04&limitperpage=10"
+                "topic"=>"หารายการ ของปี ย้อนสำรวจความทรงจำสำคัญ ที่เคยเกิดขึ้น เมื่อ 5 ปีที่แล้ว ( 2023-5 = 2018 )-> skipy=5, / 10 รายการ -> limitperpage=10 ต่อหน้า [skipy=5,  limitperpage=10]",
+               // "url"=>base_url()."api/flashbacklist?skipy=20&skipm=04&limitperpage=10"
+                 "url"=>base_url()."api/flashbacklist?skipy=5&limitperpage=10"
             ),
             array(
                 "id"=>4,
-                "topic"=>"ชวนออกสำรวจ ตามหัวเรื่อง เลือกสุ่มจำนวนหัวเรื่อง/ limit=10 จำนวนรายการ [limit=10]",
-                "url"=>base_url()."api/letsgolist?limit=10"
+                "topic"=>"ชวนออกสำรวจ ตามหัวเรื่อง เลือกสุ่มจำนวนหัวเรื่อง/ limit=20 จำนวนรายการ [limit=20]",
+                "url"=>base_url()."api/letsgolist?limit=20"
             ),
             array(
                 "id"=>5,
@@ -133,6 +138,17 @@ class Api_controller extends REST_Controller
                 "id"=>9,
                 "topic"=>"**แสดงรายการ Tags [หน้า-> page=1, จำนวนรายการต่อหน้า -> limitperpage=2000]",
                 "url"=>base_url()."api/taglistpage?page=1&limitperpage=2000"
+            ),
+            array(
+                "id"=>10,
+                "topic"=>"**แสดงรายการ ข้อมูล media หาจาก ID [id ที่ต้องการหา-> id=2194,5865]",
+                "url"=>base_url()."api/archivelistallpagebyid?id=2194,5865"
+            ),
+            array(
+                "id"=>99,
+                "topic"=>"api omeka",
+                //  "url"=>base_url()."api/monthlylist?crty=2023&crtm=04&limitpermonth=10"
+                "url"=>$vomekas_url
             ),
             //$route['api/relations']['GET'] = 'api/relations_controller';
 

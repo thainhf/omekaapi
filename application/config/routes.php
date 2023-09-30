@@ -142,7 +142,14 @@ $route['api/archivelistall']['GET'] = 'api/archivelistall_controller';
 
 $route['api/archivelistallpage']['GET'] = 'api/archivelistallpage_controller';
 
+//หารายการ *แสดงรายการ ข้อมูล media หาจาก ID [id ที่ต้องการหา-> id=2194,5865]
+$route['api/archivelistallpagebyid']['GET'] = 'api/archivelistallpagebyid_controller';
+
+////หารายการ ข้อมูล tag
 $route['api/taglistpage']['GET'] = 'api/taglistpage_controller';
+
+
+
 
 /*
 $route[$routes->posts]['GET'] = 'home_controller/posts';

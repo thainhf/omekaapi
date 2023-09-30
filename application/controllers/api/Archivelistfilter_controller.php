@@ -108,7 +108,8 @@ class Archivelistfilter_controller extends REST_Controller
       //  echo $search_text.$search_cates.$sort_by_txt.$sort_order_txt.$media_types_txt;
      //   exit();
 
-
+// &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        $resource_template="&resource_template_id[]=2";
 
         //$vper_page=$per_page;
         $vper_page = "&page=".$vpage."&per_page=" . $vlimitperpage;
@@ -117,8 +118,8 @@ class Archivelistfilter_controller extends REST_Controller
        // $api_url = $vomekas_url . "items?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0" . $vper_page;
         //$api_url_info = $vomekas_url . "infos?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0";
 
-        $api_url = $vomekas_url . "items?resource_class_id[]=23&has_tags=0".$search_text.$search_cates.$sort_by_txt.$sort_order_txt.$media_types_txt . $vper_page;
-        $api_url_info = $vomekas_url . "infos?resource_class_id[]=23&has_tags=0".$search_text.$search_cates.$media_types_txt;
+        $api_url = $vomekas_url . "items?resource_class_id[]=23&has_tags=0".$resource_template.$search_text.$search_cates.$sort_by_txt.$sort_order_txt.$media_types_txt . $vper_page;
+        $api_url_info = $vomekas_url . "infos?resource_class_id[]=23&has_tags=0".$resource_template.$search_text.$search_cates.$media_types_txt;
 
         //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/admin/item?resource_class_id[]=23&item_set_id[]=10&item_set_id[]=12&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=&has_media=&has_original=&has_thumbnails=&has_tags=0
 

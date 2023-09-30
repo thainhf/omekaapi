@@ -1421,4 +1421,48 @@ if (!function_exists('convert_date_yyyy_mm_dd')) {
         return $vdate_all;
     }
 }
+
+if (!function_exists('isValidYoutubeURL')) {
+    function isValidYoutubeURL($url){
+
+
+        $rx = '~
+                                  ^(?:https?://)?                           # Optional protocol
+                                   (?:www[.])?                              # Optional sub-domain
+                                   (?:youtube[.]com/watch[?]v=|youtu[.]be/) # Mandatory domain name (w/ query string in .com)
+                                   ([^&]{11})                               # Video id of 11 characters as capture group 1
+                                    ~x';
+
+        $has_match = preg_match($rx, $url, $matches);
+        if($has_match==0){
+            return false;
+        }else{
+            // Let's check the host first
+            $parse = parse_url($url);
+            $host = $parse['host'];
+            if (!in_array($host, array('youtube.com', 'www.youtube.com'))) {
+                return false;
+            }
+
+            $ch = curl_init();
+            $oembedURL = 'www.youtube.com/oembed?url=' . urlencode($url).'&format=json';
+            curl_setopt($ch, CURLOPT_URL, $oembedURL);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+            // Silent CURL execution
+            $output = curl_exec($ch);
+            unset($output);
+
+            $info = curl_getinfo($ch);
+            curl_close($ch);
+
+            if ($info['http_code'] !== 404)
+                return true;
+            else
+                return false;
+        }
+
+
+    }
+}
 ?>
