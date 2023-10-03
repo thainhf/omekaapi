@@ -62,7 +62,7 @@ class Api_controller extends REST_Controller
             array(
                 "id"=>9,
                 "topic"=>"คลังเอกสารอิเล็กทรอนิกส์ / page=หน้าที่ , limitperpage=จำนวนรายการต่อหน้า  ([limitperpage=10],[cates=10,12,17 หรือ 0 ทั้งหมด] ,search=คำค้น,sort_by=title หรือ date ,sort_order=desc หรือ asc, [media_types= book,image,vdo,sound,doc หรือ 0  ทั้งหมด] )",
-                "url"=>base_url()."api/archivelistfilter?page=1&limitperpage=10&cates=10,12,17,18&search=ประเวศ&sort_by=title&sort_order=asc&media_types=0"
+                "url"=>base_url()."api/archivelistfilter?page=1&limitperpage=10&cates=10,12,17,18&search=หมอชาวบ้าน&sort_by=title&sort_order=asc&media_types=0"
             ),
             array(
                 "id"=>10,

@@ -43,6 +43,8 @@ class Archiveproperties_controller extends REST_Controller
         $vomekas_url = $vconfig->config["omekas_url"];
         $api_url = $vomekas_url . "properties?limit=0&offset=0".$filter_cates ;
 
+       // echo $api_url;
+
 
         $json_objekat = cal_curl_api($api_url);
 

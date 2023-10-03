@@ -15,7 +15,7 @@ class Staffpicks_controller extends REST_Controller
 
         //ย้อนหลัง จำนวนเดือน
         $revm = $this->input->get('revm', true);
-        if(!empty($limitpermonth)){
+        if(!empty($revm)){
             $vrevm=$revm;
         }else{
             $vrevm=3;

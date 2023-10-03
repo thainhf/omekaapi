@@ -82,6 +82,7 @@ class Archivelistall_controller extends REST_Controller
 
 
         $vomekas_url = $vconfig->config["omekas_url"];
+
         $api_url = $vomekas_url . "items?".$search_txt.$filter_cates.$collection_search."&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=&has_media=&has_original=&has_thumbnails=&has_tags=0" . $vper_page;
         $api_url_info = $vomekas_url . "infos?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0";
       //  echo $api_url;

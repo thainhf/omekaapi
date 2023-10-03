@@ -32,11 +32,19 @@ class Archivelist_controller extends REST_Controller
 
         $vomekas_url = $vconfig->config["omekas_url"];
 
-        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        // &resource_template_id[]=2 =>Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
+        // &resource_template_id[]=21 =>Template ชุดเมทาดาทาตามรอยหนังสือที่ศาสตราจารย์นายแพทย์ประเวศ วะสีอ่าน
+
+        // //Date Issued contains 2023-04 OR Date Issued contains 2023-05 Template ชุดเมทาดาทาศาสตราจารย์นายแพทย์ประเวศ วะสี
         $resource_template="&resource_template_id[]=2";
 
-        $api_url = $vomekas_url . "items?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0".$resource_template . $vper_page;
-        $api_url_info = $vomekas_url . "infos?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0".$resource_template;
+        //http://ec2-18-139-29-204.ap-southeast-1.compute.amazonaws.com/api/items?resource_template_id[]=2&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&has_media=&has_original=&has_thumbnails=&has_tags=0&page=1&per_page=100
+
+        //$api_url = $vomekas_url . "items?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0".$resource_template . $vper_page;
+        $api_url = $vomekas_url . "items?sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&has_media=&has_original=&has_thumbnails=&has_tags=0".$resource_template . $vper_page;
+
+     //   $api_url_info = $vomekas_url . "infos?resource_class_id[]=23&sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&has_tags=0".$resource_template;
+        $api_url_info = $vomekas_url . "infos?sort_by=created&sort_order=desc&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&is_public=1&datetime[0][joiner]=and&datetime[0][field]=created&datetime[0][type]=gte&datetime[0][value]=&has_media=&has_original=&has_thumbnails=&has_tags=0".$resource_template;
       //  echo $api_url;
 
         //Data
