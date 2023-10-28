@@ -36,14 +36,14 @@
       ตัวอย่าง url: "http://localhost/omekaapi/api/monthlylist?crty=2023&crtm=04&limitpermonth=10"<br>
       <br>
      
-      <a href="<?php echo $config['base_url']."monthlylist.php?crty=2023&crtm=04&limitpermonth=10"; ?>" target="_blank"><?php echo $config['base_url']."flashbacklist.php?skipy=5&limitperpage=10"; ?>monthlylist.php?crty=2023&crtm=04&limitpermonth=10</a>
+      <a href="<?php echo $config['base_url']."monthlylist.php?crty=2023&crtm=04&limitpermonth=10"; ?>" target="_blank"><?php echo $config['base_url']."monthlylist.php?crty=2023&crtm=04&limitpermonth=10"; ?></a>
       </p>
          <br>
       2. เนื้อหายอดนิยม 5 รายการ hits สูงสุด toplimit [n]
       ตัวอย่าง url: "http://localhost/omekaapi/api/popularlist?toplimit=10"
 
     <br> <br>
-    <a target="_blank" href="<?php echo $config['base_url']."popularlist.php?toplimit=10"; ?>"><?php echo $config['base_url']."flashbacklist.php?skipy=5&limitperpage=10"; ?>popularlist.php?toplimit=10</a>
+    <a target="_blank" href="<?php echo $config['base_url']."popularlist.php?toplimit=10"; ?>"><?php echo $config['base_url']."popularlist.php?toplimit=10"; ?></a>
 
          <br>
       3. หารายการ ของปี ย้อนสำรวจความทรงจำสำคัญ ที่เคยเกิดขึ้น ในเดือน เมษายน (เมื่อ 20 ปีที่แล้ว) skipy=20, เดือน skipm=00 ทุกเดือน/ limitperpage=10 ต่อหน้า [skipy=20, skipm=04, limitperpage=10]",
@@ -52,7 +52,7 @@
 
     <br>
     <a target="_blank" href="<?php echo $config['base_url']."flashbacklist.php?skipy=5&limitperpage=10"; ?>">
-        <?php echo $config['base_url']."flashbacklist.php?skipy=5&limitperpage=10"; ?>flashbacklist.php?skipy=5&limitperpage=10
+        <?php echo $config['base_url']."flashbacklist.php?skipy=5&limitperpage=10"; ?>
     </a>
       <br> <br>
       4. ชวนออกสำรวจ ตามหัวเรื่อง เลือกสุ่มจำนวนหัวเรื่อง/ limit=10 จำนวนรายการ [limit=10]
