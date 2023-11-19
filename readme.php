@@ -97,7 +97,7 @@
         <?php echo $config['base_url']."archivegroup.php"; ?>
     </a>
     <br> <br>
-      9. คลังเอกสารอิเล็กทรอนิกส์ / page=หน้าที่ , limitperpage=จำนวนรายการต่อหน้า  ([limitperpage=10],[cates=10,12,17 หรือ 0 ทั้งหมด] ,search=คำค้น,sort_by=title หรือ date ,sort_order=desc หรือ asc, [media_types= book,image,vdo,sound,doc หรือ 0  ทั้งหมด] )
+      9. ค้นหา คลังเอกสารอิเล็กทรอนิกส์ / page=หน้าที่ , limitperpage=จำนวนรายการต่อหน้า  ([limitperpage=10],[cates=10,12,17 หรือ 0 ทั้งหมด] ,search=คำค้น,sort_by=title หรือ date ,sort_order=desc หรือ asc, [media_types= book,image,vdo,sound,doc หรือ 0  ทั้งหมด] )
       ตัวอย่าง url: "http://localhost/omekaapi/api/archivelistfilter?page=1&limitperpage=10&cates=10,12,17,18&search=หมอชาวบ้าน&sort_by=title&sort_order=asc&media_types=0"
       <br>
     <br>
