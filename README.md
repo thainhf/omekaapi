@@ -63,3 +63,18 @@ popularlist.php?toplimit=10
 17.
 **แสดงรายการ ข้อมูล ส่วนที่เป็นข้อมูล Visibility=Public หาจาก ID [id ที่ต้องการหา-> id=2194,5865]
 ตัวอย่าง url: "http://localhost/omekaapi/api/popularall?revm=3&toplimit=0"
+
+## Docker
+
+Build and run the bundled Apache/PHP image:
+
+```bash
+docker compose up --build
+```
+
+The API will be available at [http://localhost:9876](http://localhost:9876).  
+To stop the containers press `Ctrl+C` or run:
+
+```bash
+docker compose down
+```

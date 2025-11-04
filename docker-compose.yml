@@ -1,0 +1,6 @@
+services:
+  web:
+    build: .
+    ports:
+      - "9876:9876"
+    restart: unless-stopped
