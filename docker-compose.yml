@@ -3,4 +3,10 @@ services:
     build: .
     ports:
       - "9876:9876"
+    networks:
+      - npm-proxy
     restart: unless-stopped
+
+networks:
+  npm-proxy:
+    external: true
