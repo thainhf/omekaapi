@@ -4,6 +4,30 @@
 > **OBSOLETE — no longer used**
 > This service is retired. The active digital archive API now lives in `pset-laravel`, backed by Paperless-ngx and MariaDB. Keep this repository only for historical reference.
 
+## Obsolete API Route Inventory
+
+These routes are no longer used by the active platform, but are documented here for future migration/reference work.
+
+| Route | Purpose |
+|---|---|
+| `GET /api/monthlylist` | Returned monthly curated Omeka items filtered by year/month for homepage highlights. |
+| `GET /api/popularlist` | Returned top viewed Omeka items ranked by Omeka stats/hits. |
+| `GET /api/flashbacklist` | Returned archive items from previous years/months for flashback content. |
+| `GET /api/letsgolist` | Randomly selected items from random Omeka item sets/subjects for exploration blocks. |
+| `GET /api/item` | Returned full metadata and media detail for one Omeka item ID. |
+| `GET /api/item2` | Older/debug item-detail variant that returned one object per media file. |
+| `GET /api/relations` | Returned related items by finding other Omeka items in the same item sets. |
+| `GET /api/archivelist` | Returned a basic paginated archive listing. |
+| `GET /api/archivegroup` | Listed Omeka item-set groups/categories. |
+| `GET /api/archivelistfilter` | Returned filtered archive results by category, keyword, sort order, and media type. |
+| `GET /api/statlist` | Counted archive media totals by type: documents, photos, sounds, videos, books. |
+| `GET /api/staffpicks` | Returned staff-curated Omeka items grouped by month. |
+| `GET /api/popularall` | Returned popular items grouped by year. |
+| `GET /api/archivegroupfilter` | Listed Omeka collections/item sets filtered by resource class. |
+| `GET /api/archiveproperties` | Listed available Dublin Core / Omeka properties for advanced filters. |
+| `GET /api/archivelistall` | Advanced archive search across class, collection, property, keyword, and pagination. |
+| `GET /api/archivelistallpage` | Paginated list of all public Omeka items. |
+
 PHP middleware that wraps [Omeka S](https://omeka.p-set.org/api/) REST API. Provides simplified JSON endpoints for the **Prawase Digital Archive** (คลังข้อมูลดิจิทัล ศาสตราจารย์นายแพทย์ประเวศ วะสี).
 
 - Proxies requests to Omeka S backend with API key authentication
